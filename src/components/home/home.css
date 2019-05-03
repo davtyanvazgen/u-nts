@@ -1,0 +1,76 @@
+.container {
+  /* border: 2px solid rgb(223, 31, 31); */
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.item {
+  border: 2px solid rgb(75, 14, 139);
+  margin: 10px;
+  min-width: 400px;
+  flex-basis: 40%;
+  padding: 20px;
+}
+
+.nest-item {
+  width: 70%;
+  border-top: 1px solid grey;
+}
+
+/*  */
+/*  */
+.container2 {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.itemProjects {
+  min-width: 300px;
+  flex-basis: 25%;
+  border: 2px solid blue;
+  padding: 20px;
+  margin: 5px;
+}
+
+/*  */
+.h1 {
+  text-align: center;
+}
+
+.container3 {
+  /* border: 2px solid blueviolet; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cardItem {
+  margin: 5px;
+  /* border: 2px solid red; */
+}
+
+/*  */
+.feedContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feedbackItem {
+  width: 25%;
+  border: 2px solid blue;
+  padding: 10px;
+  min-width: 300px;
+  margin: 5px;
+}
+
+/*  */
+.contact {
+  text-align: center;
+  background-color: yellow;
+  padding: 20px;
+}
