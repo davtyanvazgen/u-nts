@@ -1,33 +1,33 @@
 import React from "react";
-import "./home.css";
+import "../home.css";
 
-import SCard from "./seconcCard";
+import NewsCard from "./newsCard";
 
-const second = () => {
+const latest = () => {
   return (
     <>
       <h1 className="h1">LATEST NEWS</h1>
       <div className="container3">
         <div className="cardItem">
-          <SCard />
+          <NewsCard />
         </div>
 
         <div className="cardItem">
-          <SCard />
+          <NewsCard />
         </div>
       </div>
 
       <div className="container3">
         <div className="cardItem">
-          <SCard />
+          <NewsCard />
         </div>
 
         <div className="cardItem">
-          <SCard />
+          <NewsCard />
         </div>
       </div>
     </>
   );
 };
 
-export default second;
+export default latest;

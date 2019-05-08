@@ -1,9 +1,9 @@
 import React from "react";
-import "./home.css";
+import "../home.css";
 
 import Button from "@material-ui/core/Button";
 
-const third = () => {
+const feedback = () => {
   return (
     <>
       <h1 className="h1">CUSTOMERS FEEDBACK</h1>
@@ -51,4 +51,4 @@ const third = () => {
   );
 };
 
-export default third;
+export default feedback;

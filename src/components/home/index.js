@@ -1,17 +1,15 @@
 import React from "react";
 
-import First from "./first";
-import Second from "./second";
-import Third from "./third";
+import Services from "./servic/services";
+import Latest from "./latest/latest";
+import Feedback from "./feedback/feedback";
 
-const home = () => {
-  return (
-    <>
-      <First />
-      <Second />
-      <Third />
-    </>
-  );
-};
+const Home = () => (
+  <>
+    <Services />
+    <Latest />
+    <Feedback />
+  </>
+);
 
-export default home;
+export default Home;
