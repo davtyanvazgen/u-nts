@@ -17,7 +17,10 @@ const Service = props => {
   return (
     <div
       className="item"
-      style={{ backgroundImage: `url(${props.service.url})` }}
+      style={{
+        backgroundImage: `url(${props.service.url})`,
+        backgroundSize: "100% 100%"
+      }}
     >
       <h1>{props.service ? props.service.title : null}</h1>
       <div className="nest-item">

@@ -21,7 +21,6 @@ class ServiceModal extends React.Component {
 
   handleTitle = e => {
     this.setState({ title: e.target.value });
-    console.log(new Date().valueOf() + this.state.image.name);
   };
 
   handleContent = e => {
@@ -32,11 +31,12 @@ class ServiceModal extends React.Component {
     this.setState({ image: e.target.files[0] });
   };
 
-  setImage = () => {
+  updateService = () => {
     const { image } = this.state;
     const name = new Date().valueOf() + image.name;
     const oldUrl = this.state.url;
     if (image) {
+      this.props.handleClose();
       const uploadTask = firebase
         .storage()
         .ref(`images/${name}`)
@@ -54,10 +54,9 @@ class ServiceModal extends React.Component {
         error => {
           // error function ....
           alert(`SOMETHING WENT WRONG  ${error}`);
-          console.log(error);
         },
         () => {
-          // complete function ....
+          // completed function ....
           firebase
             .storage()
             .ref("images")
@@ -66,7 +65,7 @@ class ServiceModal extends React.Component {
             .then(url => {
               this.setState({ url });
 
-              //////////////////////////////
+              //new service with image
               const newService = {
                 title: this.state.title,
                 content: this.state.content,
@@ -80,43 +79,40 @@ class ServiceModal extends React.Component {
                 .then(() => {
                   this.props.editService(newService);
                 })
-                .catch(() => {
-                  alert("TRY AGAIN PLEASE");
+                .catch(err => {
+                  alert(`SOMETHING WENT WRONG  ${err}`);
                 });
-              //////////////////////////////
+
+              //delete old image
               firebase
                 .storage()
                 .refFromURL(oldUrl)
                 .delete()
-                .then(() => {
-                  alert("asd");
-                })
+                .then()
                 .catch(err => {
-                  console.log(err);
+                  alert(`SOMETHING WENT WRONG  ${err}`);
                 });
             });
         }
       );
     } else {
+      //new service without image
+      const newService = {
+        title: this.state.title,
+        content: this.state.content,
+        id: this.state.id,
+        url: this.state.url
+      };
+
+      fireManager
+        .editServices(newService)
+        .then(() => {
+          this.props.editService(newService);
+        })
+        .catch(() => {
+          alert("TRY AGAIN PLEASE");
+        });
     }
-  };
-
-  updateService = () => {
-    const newService = {
-      title: this.state.title,
-      content: this.state.content,
-      id: this.state.id,
-      url: this.state.url
-    };
-
-    fireManager
-      .editServices(newService)
-      .then(() => {
-        this.props.editService(newService);
-      })
-      .catch(() => {
-        alert("TRY AGAIN PLEASE");
-      });
   };
 
   render() {
@@ -130,14 +126,12 @@ class ServiceModal extends React.Component {
           <DialogContent>
             <TextField
               onChange={this.handleTitle}
-              id="standard-bare"
               value={this.state.title}
               margin="normal"
             />
 
             <TextField
               onChange={this.handleContent}
-              id="outlined-helperText"
               value={this.state.content}
               margin="normal"
               variant="outlined"
@@ -165,7 +159,6 @@ class ServiceModal extends React.Component {
               accept="image/x-png,image/gif,image/jpeg"
               onChange={this.handleImage}
             />
-            <button onClick={this.setImage}>ok</button>
             {/* <p className="clip">{pathImage}</p> */}
           </div>
         </Dialog>

@@ -9,7 +9,7 @@
 .item {
   border: 2px solid rgb(75, 14, 139);
   margin: 10px;
-  min-width: 400px;
+  min-width: 300px;
   flex-basis: 40%;
   padding: 20px;
 }
