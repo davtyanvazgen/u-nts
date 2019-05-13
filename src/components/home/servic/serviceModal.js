@@ -5,10 +5,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 
-import fireManager from "../../../firebase/firemanager";
-import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/actions";
 import firebase from "firebase";
+import fireManager from "../../../firebase/firemanager";
+import { connect } from "react-redux";
 
 class ServiceModal extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class ServiceModal extends React.Component {
   };
 
   updateService = () => {
-    const { image } = this.state;
+    const { image, title, content, id, url } = this.state;
     const name = new Date().valueOf() + image.name;
     const oldUrl = this.state.url;
     if (image) {
@@ -66,13 +66,7 @@ class ServiceModal extends React.Component {
               this.setState({ url });
 
               //new service with image
-              const newService = {
-                title: this.state.title,
-                content: this.state.content,
-                id: this.state.id,
-                url: url,
-                imgName: name
-              };
+              const newService = { title, content, id, url, imgName: name };
 
               fireManager
                 .editServices(newService)
@@ -97,12 +91,7 @@ class ServiceModal extends React.Component {
       );
     } else {
       //new service without image
-      const newService = {
-        title: this.state.title,
-        content: this.state.content,
-        id: this.state.id,
-        url: this.state.url
-      };
+      const newService = { title, content, id, url };
 
       fireManager
         .editServices(newService)

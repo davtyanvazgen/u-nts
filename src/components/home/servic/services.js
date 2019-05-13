@@ -1,14 +1,14 @@
 import React from "react";
 import "../home.css";
-
 import Service from "./service";
+
 import { connect } from "react-redux";
 
-const Services = props => {
+const Services = ({ services }) => {
   return (
     <>
       <div className="container">
-        {props.services.map(elem => (
+        {services.map(elem => (
           <Service key={elem.id} service={elem} />
         ))}
       </div>

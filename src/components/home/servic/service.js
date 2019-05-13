@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-
 import ServiceModal from "./serviceModal";
 
-const Service = props => {
+import { connect } from "react-redux";
+
+const Service = ({ service, isSignIn }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -18,28 +19,37 @@ const Service = props => {
     <div
       className="item"
       style={{
-        backgroundImage: `url(${props.service.url})`,
+        backgroundImage: `url(${service.url})`,
         backgroundSize: "100% 100%"
       }}
     >
-      <h1>{props.service ? props.service.title : null}</h1>
+      <h1>{service ? service.title : null}</h1>
       <div className="nest-item">
-        <p>{props.service ? props.service.content : null}</p>
+        <p>{service ? service.content : null}</p>
       </div>
       <Button variant="outlined" color="primary">
         More
       </Button>
-      <Button onClick={handleClickOpen} variant="outlined" color="primary">
-        Edit
-      </Button>
+
+      {isSignIn ? (
+        <Button onClick={handleClickOpen} variant="outlined" color="primary">
+          Edit
+        </Button>
+      ) : null}
       <ServiceModal
         open={open}
         handleClickOpen={handleClickOpen}
         handleClose={handleClose}
-        service={props.service}
+        service={service}
       />
     </div>
   );
 };
 
-export default Service;
+const mapStateToProps = state => {
+  return {
+    isSignIn: state.isSignIn.data
+  };
+};
+
+export default connect(mapStateToProps)(Service);

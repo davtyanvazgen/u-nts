@@ -3,7 +3,7 @@ import "../home.css";
 
 import Button from "@material-ui/core/Button";
 
-const feedback = () => {
+const Feedback = () => {
   return (
     <>
       <h1 className="h1">CUSTOMERS FEEDBACK</h1>
@@ -51,4 +51,4 @@ const feedback = () => {
   );
 };
 
-export default feedback;
+export default Feedback;

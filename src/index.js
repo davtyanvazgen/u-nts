@@ -8,10 +8,11 @@ import initFirebase from "./firebase/fireConfig";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import servicesReducer from "./store/reducers/servicesReducer";
+import logInReducer from "./store/reducers/loginReducer";
 
 const rootReducer = combineReducers({
-  services: servicesReducer
-  // editService: editServiceReducer
+  services: servicesReducer,
+  isSignIn: logInReducer
 });
 
 const store = createStore(

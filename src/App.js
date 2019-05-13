@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-
 import Main from "./components/main";
-import SignIn from "./components/signin";
 
 import firebase from "firebase";
+import * as actionCreators from "./store/actions/actions";
+import { connect } from "react-redux";
 
 class App extends React.Component {
   state = {
@@ -16,19 +16,40 @@ class App extends React.Component {
   }
 
   authListener() {
+    const { isLogedIn } = this.props;
     firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
       if (user) {
         this.setState({ admin: user });
+        isLogedIn(this.state.admin);
       } else {
         this.setState({ admin: null });
+        isLogedIn(this.state.admin);
       }
     });
   }
 
   render() {
-    return <div>{this.state.admin ? <Main /> : <SignIn />}</div>;
+    return (
+      <>
+        <Main />
+      </>
+    );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isSignIn: state.isSignIn.data
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    isLogedIn: data => dispatch(actionCreators.checkUser(data))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
